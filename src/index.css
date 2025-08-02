@@ -181,7 +181,7 @@ All colors MUST be HSL.
   
   /* Project cards */
   .project-card {
-    @apply group relative overflow-hidden rounded-2xl bg-card border border-border;
+    @apply relative overflow-hidden rounded-2xl bg-card border border-border;
     @apply hover:shadow-2xl hover:scale-[1.02] transition-all duration-500;
   }
   

@@ -69,7 +69,7 @@ const ProjectsSection = () => {
             return (
               <Card
                 key={index}
-                className="project-card h-full"
+                className="project-card group h-full"
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
