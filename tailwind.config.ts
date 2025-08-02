@@ -26,7 +26,8 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -61,7 +62,19 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				hero: {
+					DEFAULT: 'hsl(var(--hero-bg))',
+					foreground: 'hsl(var(--hero-foreground))'
+				},
+				gold: {
+					DEFAULT: 'hsl(var(--gold))',
+					foreground: 'hsl(var(--gold-foreground))'
 				}
+			},
+			fontFamily: {
+				'display': ['Playfair Display', 'serif'],
+				'body': ['Inter', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

@@ -2,32 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Premium founder portfolio design system inspired by ieqcapital.com
+Featuring deep ODIA blues, elegant typography, and sophisticated animations.
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 215 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* ODIA brand colors inspired by logo */
+    --primary: 210 100% 25%; /* Deep ODIA blue */
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 210 85% 45%; /* Lighter blue for accents */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Elegant neutral palette */
+    --secondary: 215 15% 95%;
+    --secondary-foreground: 215 25% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 215 15% 96%;
+    --muted-foreground: 215 15% 50%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Premium accent colors */
+    --accent: 210 85% 45%; /* Bright ODIA blue */
+    --accent-foreground: 0 0% 98%;
+    
+    /* Hero background - deep space */
+    --hero-bg: 215 45% 8%;
+    --hero-foreground: 0 0% 98%;
+    
+    /* Gold accent for premium touches */
+    --gold: 45 85% 75%;
+    --gold-foreground: 215 45% 8%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--hero-bg)), hsl(215 35% 12%));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-glow: radial-gradient(circle at center, hsl(var(--primary-glow) / 0.2), transparent);
+    
+    /* Animations and transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Typography spacing */
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -100,6 +126,71 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+    scroll-behavior: smooth;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  /* Founder-grade hero section */
+  .hero-section {
+    @apply min-h-screen relative overflow-hidden;
+    background: var(--gradient-hero);
+  }
+  
+  .hero-glow {
+    @apply absolute inset-0 opacity-30;
+    background: var(--gradient-glow);
+  }
+  
+  /* Premium animations */
+  .slide-up {
+    @apply translate-y-8 opacity-0 transition-all duration-700 ease-out;
+  }
+  
+  .slide-up.animate {
+    @apply translate-y-0 opacity-100;
+  }
+  
+  .fade-in {
+    @apply opacity-0 transition-opacity duration-1000 ease-out;
+  }
+  
+  .fade-in.animate {
+    @apply opacity-100;
+  }
+  
+  /* Voice button with glow effect */
+  .voice-button {
+    @apply relative px-8 py-4 rounded-full border-2 border-accent bg-transparent text-accent;
+    @apply hover:bg-accent hover:text-accent-foreground transition-all duration-300;
+    @apply before:absolute before:inset-0 before:rounded-full before:bg-accent before:opacity-0;
+    @apply before:transition-opacity before:duration-300 hover:before:opacity-20;
+  }
+  
+  /* Floating navigation */
+  .floating-nav {
+    @apply fixed top-6 left-1/2 transform -translate-x-1/2 z-50;
+    @apply bg-background/80 backdrop-blur-lg border border-border rounded-full px-6 py-3;
+    @apply shadow-lg transition-all duration-300;
+  }
+  
+  /* Project cards */
+  .project-card {
+    @apply group relative overflow-hidden rounded-2xl bg-card border border-border;
+    @apply hover:shadow-2xl hover:scale-[1.02] transition-all duration-500;
+  }
+  
+  .project-card::before {
+    @apply absolute inset-0 bg-gradient-accent opacity-0 transition-opacity duration-500;
+    content: '';
+  }
+  
+  .project-card:hover::before {
+    @apply opacity-10;
   }
 }
