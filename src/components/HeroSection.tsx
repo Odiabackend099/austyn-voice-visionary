@@ -24,44 +24,66 @@ const HeroSection = () => {
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent/20 rounded-full blur-2xl animate-pulse delay-1000" />
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
-        <div className={`space-y-8 ${isVisible ? 'slide-up animate' : 'slide-up'}`}>
-          {/* Main headline */}
-          <div className="space-y-4">
-            <h1 className="text-6xl md:text-8xl font-display font-bold text-hero-foreground leading-tight">
-              Hello, I'm{' '}
-              <span className="bg-gradient-to-r from-accent to-primary-glow bg-clip-text text-transparent">
-                Austyn Eguale
-              </span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-hero-foreground/80 font-light max-w-3xl mx-auto leading-relaxed">
-              Builder of Nigeria's Voice AI Infrastructure
-            </p>
-          </div>
-
-          {/* Voice interaction button */}
-          <div className="flex flex-col items-center space-y-4 pt-8">
-            <Button
-              onClick={playVoiceGreeting}
-              className="voice-button group"
-              size="lg"
-            >
-              <Volume2 className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-              Hear from Agent Lexi
-              <div className="ml-3 w-2 h-2 bg-accent rounded-full animate-pulse" />
-            </Button>
-            
-            <p className="text-sm text-hero-foreground/60">
-              Experience ODIA's voice technology
-            </p>
-          </div>
-
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <div className="w-6 h-10 border-2 border-hero-foreground/30 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-hero-foreground/30 rounded-full mt-2 animate-pulse" />
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-screen">
+          {/* Left side - Content */}
+          <div className={`space-y-8 text-center lg:text-left ${isVisible ? 'slide-up animate' : 'slide-up'}`}>
+            {/* Main headline */}
+            <div className="space-y-4">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-hero-foreground leading-tight">
+                Hello, I'm{' '}
+                <span className="bg-gradient-to-r from-accent to-primary-glow bg-clip-text text-transparent">
+                  Austyn Eguale
+                </span>
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-hero-foreground/80 font-light max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                Builder of Nigeria's Voice AI Infrastructure
+              </p>
             </div>
+
+            {/* Voice interaction button */}
+            <div className="flex flex-col items-center lg:items-start space-y-4 pt-8">
+              <Button
+                onClick={playVoiceGreeting}
+                className="voice-button group"
+                size="lg"
+              >
+                <Volume2 className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
+                Hear from Agent Lexi
+                <div className="ml-3 w-2 h-2 bg-accent rounded-full animate-pulse" />
+              </Button>
+              
+              <p className="text-sm text-hero-foreground/60">
+                Experience ODIA's voice technology
+              </p>
+            </div>
+          </div>
+
+          {/* Right side - Portrait */}
+          <div className={`flex justify-center lg:justify-end ${isVisible ? 'fade-in animate' : 'fade-in'} delay-300`}>
+            <div className="relative">
+              {/* Glow effect behind portrait */}
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-glow to-accent rounded-full blur-2xl opacity-30 scale-110 animate-pulse" />
+              
+              {/* Portrait image */}
+              <img
+                src="/lovable-uploads/a3bedfeb-e5bf-4348-beb0-b14cc8f71537.png"
+                alt="Austyn Eguale - Voice AI Visionary"
+                className="relative w-80 h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] rounded-full object-cover border-4 border-accent/20 shadow-2xl hover:scale-105 transition-transform duration-700"
+              />
+              
+              {/* Floating elements around portrait */}
+              <div className="absolute -top-4 -right-4 w-8 h-8 bg-accent rounded-full animate-bounce delay-500" />
+              <div className="absolute -bottom-8 -left-8 w-6 h-6 bg-primary-glow rounded-full animate-bounce delay-1000" />
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-hero-foreground/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-hero-foreground/30 rounded-full mt-2 animate-pulse" />
           </div>
         </div>
       </div>

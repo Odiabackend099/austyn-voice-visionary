@@ -194,4 +194,9 @@ All colors MUST be HSL.
   .project-card:hover::before {
     @apply opacity-10;
   }
+  
+  /* Animation delays */
+  .delay-300 {
+    animation-delay: 300ms;
+  }
 }
