@@ -4,16 +4,49 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { BookOpen, Mic, Brain, Code, Users, Award } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/hooks/use-toast';
 
 const AISchoolSection = () => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleWaitlistSubmit = (e: React.FormEvent) => {
+  const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Waitlist functionality will be implemented after Supabase setup
-    console.log('Waitlist signup:', email);
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([{ email }]);
+
+      if (error) {
+        if (error.code === '23505') { // Unique constraint violation
+          toast({
+            title: "Already on the waitlist",
+            description: "This email is already registered for the waitlist.",
+            variant: "destructive"
+          });
+        } else {
+          throw error;
+        }
+      } else {
+        setIsSubmitted(true);
+        toast({
+          title: "Welcome to the waitlist!",
+          description: "We'll notify you when enrollment opens."
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const curriculum = [
@@ -159,8 +192,13 @@ const AISchoolSection = () => {
                       className="text-center"
                     />
                     
-                    <Button type="submit" className="w-full" size="lg">
-                      Join Waitlist
+                    <Button 
+                      type="submit" 
+                      className="w-full" 
+                      size="lg"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Joining...' : 'Join Waitlist'}
                     </Button>
                     
                     <p className="text-xs text-muted-foreground text-center">
