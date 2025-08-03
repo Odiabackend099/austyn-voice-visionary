@@ -54,6 +54,11 @@ const FloatingNav = () => {
         <div className="flex items-center space-x-3 ml-6 pl-6 border-l border-border">
           {user ? (
             <>
+              <Link to="/dashboard">
+                <Button variant="default" size="sm">
+                  Dashboard
+                </Button>
+              </Link>
               <div className="flex items-center space-x-2">
                 <User className="h-4 w-4" />
                 <span className="text-sm text-muted-foreground">
