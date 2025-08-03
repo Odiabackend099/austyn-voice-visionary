@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/hooks/useAuth';
+import { Button } from '@/components/ui/button';
+import { LogOut, User } from 'lucide-react';
 
 const FloatingNav = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,6 +50,33 @@ const FloatingNav = () => {
             {item.label}
           </button>
         ))}
+        
+        <div className="flex items-center space-x-3 ml-6 pl-6 border-l border-border">
+          {user ? (
+            <>
+              <div className="flex items-center space-x-2">
+                <User className="h-4 w-4" />
+                <span className="text-sm text-muted-foreground">
+                  {user.user_metadata?.display_name || user.email}
+                </span>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={signOut}
+                className="text-muted-foreground hover:text-primary"
+              >
+                <LogOut className="h-4 w-4" />
+              </Button>
+            </>
+          ) : (
+            <Link to="/auth">
+              <Button variant="outline" size="sm">
+                Sign In
+              </Button>
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );
