@@ -67,14 +67,23 @@ export default {
 					DEFAULT: 'hsl(var(--hero-bg))',
 					foreground: 'hsl(var(--hero-foreground))'
 				},
-				gold: {
-					DEFAULT: 'hsl(var(--gold))',
-					foreground: 'hsl(var(--gold-foreground))'
+				naira: {
+					DEFAULT: 'hsl(var(--naira))',
+					foreground: 'hsl(var(--naira-foreground))'
 				}
 			},
 			fontFamily: {
 				'display': ['Playfair Display', 'serif'],
 				'body': ['Inter', 'sans-serif'],
+			},
+			backgroundImage: {
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-accent': 'var(--gradient-accent)',
+				'gradient-glow': 'var(--gradient-glow)',
+			},
+			boxShadow: {
+				'brand': 'var(--shadow-brand)',
+				'accent': 'var(--shadow-accent)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

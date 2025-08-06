@@ -1,7 +1,9 @@
 import { useAuth } from '@/hooks/useAuth';
 import { Navigate } from 'react-router-dom';
-import ChatInterface from '@/components/ChatInterface';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import SidebarNav from '@/components/SidebarNav';
 import DashboardHeader from '@/components/DashboardHeader';
+import CourseGrid from '@/components/CourseGrid';
 
 const Dashboard = () => {
   const { user, loading } = useAuth();
@@ -19,10 +21,17 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <DashboardHeader />
-      <ChatInterface />
-    </div>
+    <SidebarProvider>
+      <div className="min-h-screen flex w-full bg-background">
+        <SidebarNav />
+        <div className="flex-1 flex flex-col">
+          <DashboardHeader />
+          <main className="flex-1 p-6">
+            <CourseGrid />
+          </main>
+        </div>
+      </div>
+    </SidebarProvider>
   );
 };
 

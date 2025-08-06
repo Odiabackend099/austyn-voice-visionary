@@ -18,34 +18,38 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 215 25% 15%;
 
-    /* ODIA brand colors inspired by logo */
-    --primary: 210 100% 25%; /* Deep ODIA blue */
-    --primary-foreground: 0 0% 98%;
-    --primary-glow: 210 85% 45%; /* Lighter blue for accents */
+    /* ODIA Brand Colors */
+    --primary: 149 100% 9%; /* #002E1A - Deep Green */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 149 80% 25%; /* Lighter green for accents */
 
     /* Elegant neutral palette */
-    --secondary: 215 15% 95%;
-    --secondary-foreground: 215 25% 25%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
 
-    --muted: 215 15% 96%;
-    --muted-foreground: 215 15% 50%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    /* Premium accent colors */
-    --accent: 210 85% 45%; /* Bright ODIA blue */
-    --accent-foreground: 0 0% 98%;
+    /* Nigerian gold accent */
+    --accent: 43 64% 76%; /* #E6D8A8 - Gold */
+    --accent-foreground: 149 100% 9%;
     
-    /* Hero background - deep space */
-    --hero-bg: 215 45% 8%;
+    /* Hero background - deep green */
+    --hero-bg: 149 100% 5%;
     --hero-foreground: 0 0% 98%;
     
-    /* Gold accent for premium touches */
-    --gold: 45 85% 75%;
-    --gold-foreground: 215 45% 8%;
+    /* Nigerian naira green */
+    --naira: 120 100% 25%;
+    --naira-foreground: 0 0% 100%;
     
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--hero-bg)), hsl(215 35% 12%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--hero-bg)), hsl(149 80% 8%));
     --gradient-accent: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
     --gradient-glow: radial-gradient(circle at center, hsl(var(--primary-glow) / 0.2), transparent);
+    
+    /* Shadows with brand colors */
+    --shadow-brand: 0 10px 30px -10px hsl(var(--primary) / 0.2);
+    --shadow-accent: 0 4px 20px -4px hsl(var(--accent) / 0.3);
     
     /* Animations and transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
