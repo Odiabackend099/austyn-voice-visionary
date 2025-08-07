@@ -63,7 +63,7 @@ const TestimonialsSection = () => {
 
                 <div className="flex items-center space-x-4 pt-6 border-t border-border">
                   <Avatar className="w-12 h-12">
-                    <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+                    <AvatarImage src={testimonial.avatar} alt={`${testimonial.name} — ${testimonial.title} at ${testimonial.company}`} loading="lazy" />
                     <AvatarFallback className="bg-primary text-primary-foreground font-semibold">
                       {testimonial.initials}
                     </AvatarFallback>

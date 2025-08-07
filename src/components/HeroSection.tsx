@@ -70,6 +70,8 @@ const HeroSection = () => {
               <img
                 src="/lovable-uploads/a3bedfeb-e5bf-4348-beb0-b14cc8f71537.png"
                 alt="Austyn Eguale - Voice AI Visionary"
+                loading="eager"
+                decoding="async"
                 className="relative w-80 h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] rounded-full object-cover border-4 border-accent/20 shadow-2xl hover:scale-105 transition-transform duration-700"
               />
               

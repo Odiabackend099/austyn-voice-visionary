@@ -10,6 +10,7 @@ import { Play, Clock, Users, Star, CheckCircle, ArrowLeft } from 'lucide-react';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import SidebarNav from '@/components/SidebarNav';
 import DashboardHeader from '@/components/DashboardHeader';
+import SEOHead from '@/components/SEOHead';
 
 interface Course {
   id: string;
@@ -168,6 +169,21 @@ const CourseDetail = () => {
 
   return (
     <SidebarProvider>
+      <SEOHead
+        title={`${course.title} | ODIA Courses`}
+        description={course.description}
+        type="course"
+        canonicalUrl={`${window.location.origin}/courses/${course.slug}`}
+        image={course.cover_url || undefined}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Course",
+          name: course.title,
+          description: course.description,
+          provider: { "@type": "Organization", name: "ODIA" },
+          offers: { "@type": "Offer", priceCurrency: "NGN", price: course.price }
+        }}
+      />
       <div className="min-h-screen flex w-full bg-background">
         <SidebarNav />
         <div className="flex-1 flex flex-col">
