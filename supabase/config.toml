@@ -1,1 +1,7 @@
 project_id = "tbesbwjsflwjtmjdcobo"
+
+[functions.initiate-flw-payment]
+verify_jwt = true
+
+[functions.flutterwave-webhook]
+verify_jwt = false
