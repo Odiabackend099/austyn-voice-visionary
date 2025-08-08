@@ -42,20 +42,33 @@ const HeroSection = () => {
               </p>
             </div>
 
-            {/* Voice interaction button */}
+            {/* Call to actions */}
             <div className="flex flex-col items-center lg:items-start space-y-4 pt-8">
-              <Button
-                onClick={playVoiceGreeting}
-                className="voice-button group"
-                size="lg"
-              >
-                <Volume2 className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-                Hear from Agent Lexi
-                <div className="ml-3 w-2 h-2 bg-accent rounded-full animate-pulse" />
-              </Button>
-              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="#ai-school" aria-label="Browse AI School courses">
+                  <Button size="lg">
+                    Start Building with ODIA
+                  </Button>
+                </a>
+                <a href="#projects" aria-label="Explore projects">
+                  <Button variant="outline" size="lg">
+                    Explore Projects
+                  </Button>
+                </a>
+                <Button
+                  onClick={playVoiceGreeting}
+                  variant="ghost"
+                  className="voice-button group"
+                  size="lg"
+                  aria-label="Play voice greeting from Agent Lexi"
+                >
+                  <Volume2 className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
+                  Hear from Agent Lexi
+                  <div className="ml-3 w-2 h-2 bg-accent rounded-full animate-pulse" />
+                </Button>
+              </div>
               <p className="text-sm text-hero-foreground/60">
-                Experience ODIA's voice technology
+                Experience Nigeria's voice-first AI infrastructure
               </p>
             </div>
           </div>

@@ -1,5 +1,7 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import SEOHead from "@/components/SEOHead";
 
 const NotFound = () => {
   const location = useLocation();
@@ -12,15 +14,27 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
-      </div>
-    </div>
+    <main className="min-h-screen flex items-center justify-center bg-background text-foreground">
+      <SEOHead
+        title="404 — Page Not Found | ODIA"
+        description="The page you're looking for doesn't exist on ODIA."
+        type="website"
+        canonicalUrl={`${window.location.origin}${location.pathname}`}
+        image="/lovable-uploads/a3bedfeb-e5bf-4348-beb0-b14cc8f71537.png"
+      />
+      <section className="text-center px-6">
+        <h1 className="text-6xl font-display font-bold mb-4">404</h1>
+        <p className="text-lg text-muted-foreground mb-8">We couldn't find that page.</p>
+        <div className="flex gap-3 justify-center">
+          <Link to="/">
+            <Button>Back to Home</Button>
+          </Link>
+          <a href="#ai-school">
+            <Button variant="outline">Browse Courses</Button>
+          </a>
+        </div>
+      </section>
+    </main>
   );
 };
 
