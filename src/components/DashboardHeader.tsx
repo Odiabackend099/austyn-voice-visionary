@@ -42,9 +42,9 @@ const DashboardHeader = () => {
           </Button>
           
           <Avatar className="h-8 w-8 ring-2 ring-primary/10">
-            <AvatarImage src={user?.user_metadata?.avatar_url} />
+            {/* Removed user image for privacy; show initials only */}
             <AvatarFallback className="bg-primary text-primary-foreground text-sm font-semibold">
-              {user?.email?.charAt(0).toUpperCase()}
+              {user?.email?.charAt(0)?.toUpperCase() || 'U'}
             </AvatarFallback>
           </Avatar>
         </div>
