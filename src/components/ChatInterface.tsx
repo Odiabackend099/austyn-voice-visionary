@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Send, Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 import ChatMessage from '@/components/ChatMessage';
 import VoiceRecorder from '@/components/VoiceRecorder';
+import { initAudio, speakText, askAgentAndSpeak } from '@/services/ttsService';
 
 interface Message {
   id: string;
@@ -28,6 +29,7 @@ const ChatInterface = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [audioInitialized, setAudioInitialized] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -41,6 +43,12 @@ const ChatInterface = () => {
   const handleSendMessage = async (content: string, isAudio = false) => {
     if (!content.trim()) return;
 
+    // Initialize audio on first interaction if not already done
+    if (!audioInitialized) {
+      initAudio();
+      setAudioInitialized(true);
+    }
+
     const userMessage: Message = {
       id: Date.now().toString(),
       content,
@@ -53,17 +61,35 @@ const ChatInterface = () => {
     setInputValue('');
     setIsLoading(true);
 
-    // TODO: Integrate with AI service
-    setTimeout(() => {
+    try {
+      // Use ODIA TTS service to get and speak AI response
+      const aiResponse = await askAgentAndSpeak(content.trim());
+      
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: 'This is a demo response. The AI integration will be added next.',
+        content: aiResponse || `I understand you said: "${content.trim()}". This is a simulated AI response.`,
         role: 'assistant',
         timestamp: new Date(),
       };
+      
       setMessages(prev => [...prev, assistantMessage]);
+      
+      // Speak AI response if not muted
+      if (!isMuted && aiResponse) {
+        await speakText(aiResponse);
+      }
+    } catch (error) {
+      console.error('Error getting AI response:', error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: "Sorry, I'm having trouble processing your request right now.",
+        role: 'assistant',
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
