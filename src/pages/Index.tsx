@@ -1,7 +1,10 @@
 import FloatingNav from '@/components/FloatingNav';
 import HeroSection from '@/components/HeroSection';
+import AboutSection from '@/components/AboutSection';
 import StorySection from '@/components/StorySection';
 import ProjectsSection from '@/components/ProjectsSection';
+import EducationSection from '@/components/EducationSection';
+import SkillsSection from '@/components/SkillsSection';
 import AISchoolSection from '@/components/AISchoolSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import SocialSection from '@/components/SocialSection';
@@ -20,8 +23,11 @@ const Index = () => {
       />
       <FloatingNav />
       <HeroSection />
+      <AboutSection />
       <StorySection />
       <ProjectsSection />
+      <EducationSection />
+      <SkillsSection />
       <TestimonialsSection />
       <AISchoolSection />
       <SocialSection />
