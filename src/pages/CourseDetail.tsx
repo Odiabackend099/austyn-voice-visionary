@@ -18,7 +18,6 @@ interface Course {
   slug: string;
   description: string;
   cover_url: string;
-  trailer_url_opus_16kbps: string;
   price: number;
   created_at: string;
 }
@@ -33,8 +32,7 @@ interface Lesson {
 
 interface Testimonial {
   id: string;
-  user_name: string;
-  user_avatar: string;
+  name: string;
   content: string;
   rating: number;
 }
@@ -80,7 +78,7 @@ const CourseDetail = () => {
       const { data: testimonialsData, error: testimonialsError } = await supabase
         .from('testimonials')
         .select('*')
-        .eq('course_id', courseData.id);
+        .limit(5);
 
       if (testimonialsError) throw testimonialsError;
       setTestimonials(testimonialsData || []);
@@ -294,7 +292,7 @@ const CourseDetail = () => {
                                 ))}
                               </div>
                               <p className="text-foreground mb-2">"{testimonial.content}"</p>
-                              <p className="text-sm text-muted-foreground">— {testimonial.user_name}</p>
+                              <p className="text-sm text-muted-foreground">— {testimonial.name}</p>
                             </div>
                           ))}
                         </div>

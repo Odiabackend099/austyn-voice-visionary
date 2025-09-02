@@ -1,1 +1,7 @@
 project_id = "nyrvnskbkitrazudrkkc"
+
+[functions.flutterwave-webhook]
+verify_jwt = false
+
+[functions.odia-agent]
+verify_jwt = false

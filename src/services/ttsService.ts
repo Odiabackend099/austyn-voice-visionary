@@ -1,6 +1,7 @@
 // ODIA TTS integration service
+import { supabase } from '@/integrations/supabase/client';
+
 const TTS_SERVER_URL = 'https://odia-tts.onrender.com';
-const OPENAI_API_KEY = ''; // Your OpenAI API key if using the agent endpoint
 
 let audioCtx: AudioContext | null = null;
 
@@ -53,24 +54,23 @@ export async function askAgentAndSpeak(userMessage: string): Promise<string> {
   let replyText = '';
   
   try {
-    if (OPENAI_API_KEY) {
-      const res = await fetch(`${TTS_SERVER_URL}/agent`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage, apiKey: OPENAI_API_KEY })
-      });
-      const data = await res.json();
-      replyText = data.reply || data.text || '';
+    // Call secure AI agent via Supabase Edge Function
+    const { data, error } = await supabase.functions.invoke('odia-agent', {
+      body: { message: userMessage }
+    });
+    
+    if (error) {
+      console.error('AI agent error:', error);
+      replyText = `Sorry, I'm having trouble processing your request right now.`;
     } else {
-      // No API key provided – just echo the user message
-      replyText = userMessage;
+      replyText = data?.reply || `Echo: ${userMessage}`;
     }
   } catch (err) {
-    console.error('askAgentAndSpeak: Agent request failed, falling back to echo.', err);
-    replyText = userMessage;
+    console.error('askAgentAndSpeak: Agent request failed', err);
+    replyText = `Sorry, I'm having trouble processing your request right now.`;
   }
   
-  // Speak the reply (or echoed message)
+  // Speak the reply
   if (replyText) {
     await speakText(replyText);
   }

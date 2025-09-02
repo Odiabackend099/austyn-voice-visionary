@@ -41,7 +41,7 @@ serve(async (req) => {
     const amount: number | undefined = data?.amount;
     const customerEmail: string | undefined = data?.customer?.email ?? data?.customer?.email_address;
 
-    console.log("Webhook received", { event, status, txRef, amount, customerEmail });
+    console.log("Webhook received", { event, status, txRef, amount });
 
     if (!txRef) {
       return new Response(JSON.stringify({ error: "Missing tx_ref" }), {
