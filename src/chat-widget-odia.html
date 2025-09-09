@@ -541,12 +541,20 @@
                     minute: '2-digit' 
                 });
                 
-                messageDiv.innerHTML = `
-                    <div class="message-content">
-                        <div>${content}</div>
-                        <div class="message-time">${time}</div>
-                    </div>
-                `;
+                // Security fix: Prevent XSS by using textContent instead of innerHTML
+                const messageContent = document.createElement('div');
+                messageContent.className = 'message-content';
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.textContent = content; // Safe from XSS
+                
+                const timeDiv = document.createElement('div');
+                timeDiv.className = 'message-time';
+                timeDiv.textContent = time;
+                
+                messageContent.appendChild(contentDiv);
+                messageContent.appendChild(timeDiv);
+                messageDiv.appendChild(messageContent);
                 
                 this.chatMessages.appendChild(messageDiv);
                 this.scrollToBottom();
@@ -556,15 +564,23 @@
                 const indicator = document.createElement('div');
                 indicator.className = 'message bot';
                 indicator.id = 'typing-indicator';
-                indicator.innerHTML = `
-                    <div class="typing-indicator show">
-                        <div class="typing-dots">
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                            <div class="dot"></div>
-                        </div>
-                    </div>
-                `;
+                
+                // Security fix: Create elements safely without innerHTML
+                const typingIndicatorDiv = document.createElement('div');
+                typingIndicatorDiv.className = 'typing-indicator show';
+                
+                const typingDotsDiv = document.createElement('div');
+                typingDotsDiv.className = 'typing-dots';
+                
+                for (let i = 0; i < 3; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'dot';
+                    typingDotsDiv.appendChild(dot);
+                }
+                
+                typingIndicatorDiv.appendChild(typingDotsDiv);
+                indicator.appendChild(typingIndicatorDiv);
+                
                 this.chatMessages.appendChild(indicator);
                 this.scrollToBottom();
             }

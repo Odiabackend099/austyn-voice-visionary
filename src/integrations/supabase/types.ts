@@ -157,6 +157,36 @@ export type Database = {
           },
         ]
       }
+      payment_confirmations: {
+        Row: {
+          amount: number | null
+          created_at: string | null
+          email: string | null
+          id: string
+          status: string
+          transaction_ref: string
+          updated_at: string | null
+        }
+        Insert: {
+          amount?: number | null
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          status: string
+          transaction_ref: string
+          updated_at?: string | null
+        }
+        Update: {
+          amount?: number | null
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          status?: string
+          transaction_ref?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       testimonials: {
         Row: {
           avatar_url: string | null

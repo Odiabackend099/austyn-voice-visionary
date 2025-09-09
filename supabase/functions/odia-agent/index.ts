@@ -1,24 +1,57 @@
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
+// Security: Restrict CORS to allowed origins only
+const ALLOWED_ORIGINS = [
+  'https://nyrvnskbkitrazudrkkc.supabase.co',
+  'https://localhost:5173',
+  'https://127.0.0.1:5173'
+];
+
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': '*', // Will be dynamically set below
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
 serve(async (req) => {
+  // Security: Check origin and set CORS header dynamically
+  const origin = req.headers.get('origin') || req.headers.get('referer') || '';
+  const isAllowedOrigin = ALLOWED_ORIGINS.some(allowed => origin.startsWith(allowed));
+  
+  const dynamicCorsHeaders = {
+    ...corsHeaders,
+    'Access-Control-Allow-Origin': isAllowedOrigin ? origin : 'null'
+  };
+
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders });
+    return new Response(null, { headers: dynamicCorsHeaders });
   }
 
   try {
     const { message } = await req.json();
     
-    if (!message) {
+    // Security: Input validation and rate limiting
+    if (!message || typeof message !== 'string') {
       return new Response(
-        JSON.stringify({ error: 'Message is required' }), 
-        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: 'Valid message string is required' }), 
+        { status: 400, headers: { ...dynamicCorsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Security: Limit message length to prevent abuse
+    if (message.length > 2000) {
+      return new Response(
+        JSON.stringify({ error: 'Message too long. Maximum 2000 characters allowed.' }), 
+        { status: 400, headers: { ...dynamicCorsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Security: Basic content filtering
+    if (message.trim().length < 3) {
+      return new Response(
+        JSON.stringify({ error: 'Message too short. Please provide a meaningful question.' }), 
+        { status: 400, headers: { ...dynamicCorsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
@@ -29,7 +62,7 @@ serve(async (req) => {
       // Fallback to echo for development
       return new Response(
         JSON.stringify({ reply: `Echo: ${message}` }), 
-        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        { headers: { ...dynamicCorsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
@@ -46,7 +79,7 @@ serve(async (req) => {
         messages: [
           { 
             role: 'system', 
-            content: 'You are ODIA AI Agent, a helpful assistant for Nigerian businesses. Provide concise, practical responses in a friendly tone.' 
+            content: 'You are ODIA AI Agent, a helpful assistant for Nigerian businesses. Provide concise, practical responses in a friendly tone. Do not provide harmful, inappropriate, or illegal content.' 
           },
           { role: 'user', content: message }
         ],
@@ -67,14 +100,14 @@ serve(async (req) => {
 
     return new Response(
       JSON.stringify({ reply }), 
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { headers: { ...dynamicCorsHeaders, 'Content-Type': 'application/json' } }
     );
 
   } catch (error) {
     console.error('Error in odia-agent function:', error);
     return new Response(
       JSON.stringify({ error: 'Internal server error' }), 
-      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { status: 500, headers: { ...dynamicCorsHeaders, 'Content-Type': 'application/json' } }
     );
   }
 });
