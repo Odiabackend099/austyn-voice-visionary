@@ -11,7 +11,7 @@ const HeroSection = () => {
 
   const playVoiceGreeting = () => {
     // Placeholder for voice functionality - will be implemented after Supabase setup
-    console.log('Playing Agent Lexi greeting...');
+    console.log('Playing Adaqua AI greeting...');
   };
 
   return (
@@ -60,10 +60,10 @@ const HeroSection = () => {
                   variant="ghost"
                   className="voice-button group"
                   size="lg"
-                  aria-label="Play voice greeting from Agent Lexi"
+                  aria-label="Play voice greeting from Adaqua AI"
                 >
                   <Volume2 className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-                  Hear from Agent Lexi
+                  Hear from Adaqua AI
                   <div className="ml-3 w-2 h-2 bg-accent rounded-full animate-pulse" />
                 </Button>
               </div>

@@ -17,7 +17,7 @@ const ProjectsSection = () => {
       color: 'from-red-500 to-orange-500'
     },
     {
-      title: 'Agent Lexi',
+      title: 'Adaqua AI',
       description: 'WhatsApp AI assistant empowering Nigerian SMEs with voice automation',
       icon: MessageSquare,
       category: 'Business Intelligence',

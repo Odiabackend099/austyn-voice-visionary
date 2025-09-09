@@ -10,7 +10,7 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import SocialSection from '@/components/SocialSection';
 import Footer from '@/components/Footer';
 import SEOHead from '@/components/SEOHead';
-import AgentLexiChat from '@/components/AgentLexiChat';
+import AdaquaAIChat from '@/components/AdaquaAIChat';
 
 const Index = () => {
   return (
@@ -52,9 +52,9 @@ const Index = () => {
       <AISchoolSection />
       <SocialSection />
       
-      {/* Agent Lexi Chat - Fixed position for easy access */}
+      {/* Adaqua AI Chat - Fixed position for easy access */}
       <div className="fixed bottom-8 right-8 z-50">
-        <AgentLexiChat />
+        <AdaquaAIChat />
       </div>
       
       <Footer />

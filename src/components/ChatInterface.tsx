@@ -20,7 +20,7 @@ const ChatInterface = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: 'Hello! I\'m Agent Odia, your AI voice assistant. You can type or speak to me. How can I help you today?',
+      content: 'Hello! I\'m Adaqua AI, your voice-first AI assistant. You can type or speak to me. How can I help you today?',
       role: 'assistant',
       timestamp: new Date(),
     }
@@ -62,7 +62,7 @@ const ChatInterface = () => {
     setIsLoading(true);
 
     try {
-      // Use ODIA TTS service to get and speak AI response
+      // Use Adaqua AI service to get response
       const aiResponse = await askAgentAndSpeak(content.trim());
       
       const assistantMessage: Message = {
@@ -118,7 +118,7 @@ const ChatInterface = () => {
                     <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                     <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                   </div>
-                  <span className="text-sm text-muted-foreground">Agent Odia is thinking...</span>
+                  <span className="text-sm text-muted-foreground">Adaqua AI is thinking...</span>
                 </div>
               </Card>
             </div>
