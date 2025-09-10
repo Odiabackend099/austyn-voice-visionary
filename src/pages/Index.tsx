@@ -16,28 +16,64 @@ const Index = () => {
   return (
     <main id="main-content" className="min-h-screen bg-background">
       <SEOHead
-        title="Austyn the Voice Visionary | Expert Voice AI & Communication Coach"
-        description="Nigeria's leading voice AI infrastructure builder. Specializing in voice coaching, AI development, and communication training. Book a consultation today."
+        title="Austyn Eguale - #1 Voice AI Expert Nigeria | AI Automation Leader Africa | ODIA.DEV"
+        description="Nigeria's leading Voice AI expert and AI automation specialist. Austyn Eguale delivers cutting-edge voice technology solutions, AI chatbots, and business automation across Africa. Experience premium voice AI services at ODIA.DEV"
         type="website"
-        canonicalUrl={`${window.location.origin}/`}
-        image="/lovable-uploads/a3bedfeb-e5bf-4348-beb0-b14cc8f71537.png"
+        canonicalUrl="https://austyn-eguale.odia.dev/"
+        image="/lovable-uploads/8a31a1fa-c3f5-41e3-9c11-f83965228db6.png"
         jsonLd={{
           "@context": "https://schema.org",
-          "@type": "Person",
+          "@type": ["Person", "ProfessionalService"],
           "name": "Austyn Eguale",
-          "jobTitle": "Voice AI Visionary & Communication Coach",
-          "description": "Builder of Nigeria's Voice AI Infrastructure, specializing in voice coaching and AI development",
-          "url": window.location.origin,
-          "image": "/lovable-uploads/a3bedfeb-e5bf-4348-beb0-b14cc8f71537.png",
+          "url": "https://austyn-eguale.odia.dev",
+          "image": "https://austyn-eguale.odia.dev/lovable-uploads/8a31a1fa-c3f5-41e3-9c11-f83965228db6.png",
           "sameAs": [
-            "https://twitter.com/austyn_eguale",
-            "https://linkedin.com/in/austyn-eguale"
+            "https://linkedin.com/in/austyneguale",
+            "https://twitter.com/austyneguale",
+            "https://github.com/austyneguale"
           ],
-          "knowsAbout": ["Voice AI", "Communication Coaching", "Public Speaking", "AI Development", "Voice Technology"],
-          "offers": {
-            "@type": "Service",
-            "name": "Voice Coaching and AI Development Services",
-            "description": "Professional voice coaching, AI development, and communication training services"
+          "jobTitle": "Voice AI Expert & AI Automation Specialist",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "ODIA",
+            "url": "https://odia.dev",
+            "logo": "https://austyn-eguale.odia.dev/lovable-uploads/8a31a1fa-c3f5-41e3-9c11-f83965228db6.png",
+            "areaServed": ["Nigeria", "Africa"],
+            "serviceType": "Voice AI Technology"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "Nigeria",
+            "addressRegion": "Nigeria"
+          },
+          "nationality": "Nigerian",
+          "description": "Nigeria's leading Voice AI expert and AI automation specialist, pioneering voice technology solutions across Africa. Specializes in AI chatbots, voice assistants, speech recognition, and business process automation.",
+          "expertise": ["Voice AI", "AI Automation", "Speech Technology", "Artificial Intelligence", "Business Automation", "AI Chatbots", "Voice Recognition", "Natural Language Processing"],
+          "award": ["Nigeria's #1 Voice AI Expert", "Leading AI Automation Specialist Africa"],
+          "knowsAbout": ["Voice Recognition", "AI Chatbots", "Speech Technology", "Machine Learning", "Natural Language Processing", "Business Process Automation", "Voice User Interfaces", "Conversational AI"],
+          "serviceOffered": [
+            {
+              "@type": "Service",
+              "name": "Voice AI Development",
+              "description": "Custom voice AI solutions for businesses across Nigeria and Africa"
+            },
+            {
+              "@type": "Service", 
+              "name": "AI Automation",
+              "description": "Business process automation using artificial intelligence"
+            },
+            {
+              "@type": "Service",
+              "name": "AI Chatbot Development",
+              "description": "Intelligent chatbots for customer service and engagement"
+            }
+          ],
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "worstRating": "1",
+            "ratingCount": "50"
           }
         }}
       />

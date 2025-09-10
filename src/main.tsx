@@ -13,5 +13,4 @@ if (rootEl) {
   );
 }
 
-// Inject the floating chat widget (separate root, overlays via fixed CSS)
-import "./odiadev-floating";
+// Floating chat removed - using integrated AdaquaAI chat instead
