@@ -4,41 +4,59 @@ const TTS_API_URL = 'https://tts-api.odia.dev/v1/tts';
 const DEFAULT_VOICE_ID = 'naija_female_warm';
 
 /**
- * Speak text using ODIADEV TTS API
+ * Speak text using OpenAI TTS API (fallback from ODIADEV)
  */
-export async function speak(text: string, voice_id: string = DEFAULT_VOICE_ID): Promise<string> {
+export async function speak(text: string, voice_id: string = 'alloy'): Promise<string> {
   try {
-    // Get API key from Supabase secrets
-    const { data: secrets } = await supabase.functions.invoke('get-secrets', {
-      body: { keys: ['ODIADEV_API_KEY'] }
-    });
-    
-    const apiKey = secrets?.ODIADEV_API_KEY;
-    if (!apiKey) {
-      throw new Error('ODIADEV_API_KEY not found in secrets');
+    // Try ODIADEV first
+    try {
+      const { data: secrets } = await supabase.functions.invoke('get-secrets', {
+        body: { keys: ['ODIADEV_API_KEY'] }
+      });
+      
+      const apiKey = secrets?.ODIADEV_API_KEY;
+      if (apiKey) {
+        const response = await fetch(TTS_API_URL, {
+          method: 'POST',
+          headers: {
+            'x-api-key': apiKey,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            text,
+            voice_id,
+            format: 'mp3'
+          })
+        });
+
+        if (response.ok) {
+          const audioBlob = await response.blob();
+          return URL.createObjectURL(audioBlob);
+        }
+      }
+    } catch (odiaError) {
+      console.warn('ODIADEV TTS failed, falling back to OpenAI:', odiaError);
     }
 
-    const response = await fetch(TTS_API_URL, {
-      method: 'POST',
-      headers: {
-        'x-api-key': apiKey,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        text,
-        voice_id,
-        format: 'mp3'
-      })
+    // Fallback to OpenAI TTS
+    const { data, error } = await supabase.functions.invoke('openai-tts', {
+      body: { text, voice: voice_id }
     });
 
-    if (!response.ok) {
-      throw new Error(`TTS failed (${response.status})`);
+    if (error) {
+      throw new Error(`OpenAI TTS failed: ${error.message}`);
     }
 
-    const audioBlob = await response.blob();
+    // Convert base64 to audio blob
+    const audioData = atob(data.audioContent);
+    const audioArray = new Uint8Array(audioData.length);
+    for (let i = 0; i < audioData.length; i++) {
+      audioArray[i] = audioData.charCodeAt(i);
+    }
+    const audioBlob = new Blob([audioArray], { type: 'audio/mpeg' });
     return URL.createObjectURL(audioBlob);
   } catch (error) {
-    console.error('TTS Error:', error);
+    console.error('All TTS methods failed:', error);
     throw error;
   }
 }

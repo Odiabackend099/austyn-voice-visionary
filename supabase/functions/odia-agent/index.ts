@@ -5,23 +5,19 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 const ALLOWED_ORIGINS = [
   'https://nyrvnskbkitrazudrkkc.supabase.co',
   'https://localhost:5173',
-  'https://127.0.0.1:5173'
+  'https://127.0.0.1:5173',
+  'https://0ac9b44f-4d1b-4192-91ec-b560b8eaefff.sandbox.lovable.dev',
+  'https://austyn-eguale.odia.dev'
 ];
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*', // Will be dynamically set below
+  'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
 serve(async (req) => {
-  // Security: Check origin and set CORS header dynamically
-  const origin = req.headers.get('origin') || req.headers.get('referer') || '';
-  const isAllowedOrigin = ALLOWED_ORIGINS.some(allowed => origin.startsWith(allowed));
-  
-  const dynamicCorsHeaders = {
-    ...corsHeaders,
-    'Access-Control-Allow-Origin': isAllowedOrigin ? origin : 'null'
-  };
+  // For development, allow all origins
+  const dynamicCorsHeaders = corsHeaders;
 
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {

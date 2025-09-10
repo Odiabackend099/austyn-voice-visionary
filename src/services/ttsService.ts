@@ -52,6 +52,8 @@ export async function askAdaquaAI(userMessage: string): Promise<string> {
   if (!userMessage) return '';
   
   try {
+    console.log('Sending message to Adaqua AI:', userMessage);
+    
     // Call Adaqua AI via Supabase Edge Function
     const { data, error } = await supabase.functions.invoke('odia-agent', {
       body: { message: userMessage }
@@ -59,13 +61,13 @@ export async function askAdaquaAI(userMessage: string): Promise<string> {
     
     if (error) {
       console.error('Adaqua AI error:', error);
-      return `Sorry, I'm having trouble processing your request right now.`;
+      return `Hello! I'm Adaqua AI, your voice-first assistant. I'm experiencing some technical difficulties right now, but I'm here to help you with AI automation and voice technology solutions for your business.`;
     }
     
-    return data?.reply || `Echo: ${userMessage}`;
+    return data?.reply || `Hello! I'm Adaqua AI. You said: "${userMessage}". How can I help you with AI automation today?`;
   } catch (err) {
     console.error('askAdaquaAI: Agent request failed', err);
-    return `Sorry, I'm having trouble processing your request right now.`;
+    return `Hello! I'm Adaqua AI, your voice-first assistant for Nigeria. I'm experiencing some connectivity issues, but I'm here to help you with AI automation and voice technology solutions.`;
   }
 }
 

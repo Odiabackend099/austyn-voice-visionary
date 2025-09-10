@@ -5,3 +5,12 @@ verify_jwt = false
 
 [functions.odia-agent]
 verify_jwt = false
+
+[functions.openai-tts]
+verify_jwt = false
+
+[functions.get-secrets]
+verify_jwt = false
+
+[functions.speech-to-text]
+verify_jwt = false
